@@ -23,16 +23,21 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.androiddevchallenge.ui.theme.MyTheme
+import androidx.core.view.WindowCompat
+import com.example.androiddevchallenge.ui.components.Welcome
+import com.example.androiddevchallenge.ui.theme.BloomTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            MyTheme {
-                MyApp()
+            BloomTheme {
+                Welcome()
             }
         }
+
     }
 }
 
@@ -47,7 +52,7 @@ fun MyApp() {
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
-    MyTheme {
+    BloomTheme {
         MyApp()
     }
 }
@@ -55,7 +60,7 @@ fun LightPreview() {
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-    MyTheme(darkTheme = true) {
+    BloomTheme(darkTheme = true) {
         MyApp()
     }
 }
