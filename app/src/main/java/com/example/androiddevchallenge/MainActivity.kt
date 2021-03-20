@@ -20,47 +20,27 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.view.WindowCompat
-import com.example.androiddevchallenge.ui.components.Welcome
+import com.example.androiddevchallenge.ui.components.NavHost
 import com.example.androiddevchallenge.ui.theme.BloomTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
             BloomTheme {
-                Welcome()
+                MyApp()
             }
         }
 
     }
 }
 
-// Start building your app here!
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+        NavHost()
     }
 }
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun LightPreview() {
-    BloomTheme {
-        MyApp()
-    }
-}
-
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    BloomTheme(darkTheme = true) {
-        MyApp()
-    }
-}

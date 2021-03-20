@@ -16,7 +16,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,72 +29,69 @@ import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.BloomTheme
 
 @Composable
-fun Welcome() {
-    Surface(color = MaterialTheme.colors.background) {
+fun Welcome(onLogin: () -> Unit = {}) {
+    Box(
+        modifier = Modifier
+            .background(color = MaterialTheme.colors.primary)
+            .fillMaxSize(),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.welcome_bg),
+            contentDescription = "Welcome Background",
+            contentScale = ContentScale.FillBounds
+        )
 
-        Box(
+        Column(
             modifier = Modifier
-                .background(color = MaterialTheme.colors.primary)
-                .fillMaxSize(),
-            contentAlignment = Alignment.TopCenter
+                .padding(top = 72.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(id = R.drawable.welcome_bg),
-                contentDescription = "Welcome Background",
-                contentScale = ContentScale.FillBounds
+                modifier = Modifier
+                    .offset(x = 88.dp),
+                painter = painterResource(id = R.drawable.ic_welcome_illos),
+                contentDescription = "Welcome Green Leaf",
+                contentScale = ContentScale.None
+            )
+            Spacer(modifier = Modifier.height(48.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_logo),
+                contentDescription = "Bloom Logo"
             )
 
-            Column(
+            Text(
+                modifier = Modifier.paddingFromBaseline(top = 32.dp),
+                text = "Beautiful home garden solutions",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.subtitle1
+            )
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Button(
                 modifier = Modifier
-                    .padding(top = 72.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .height(48.dp)
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                onClick = {},
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
             ) {
-                Image(
-                    modifier = Modifier
-                        .offset(x = 88.dp),
-                    painter = painterResource(id = R.drawable.ic_welcome_illos),
-                    contentDescription = "Welcome Green Leaf",
-                    contentScale = ContentScale.None
-                )
-                Spacer(modifier = Modifier.height(48.dp))
-
-                Image(
-                    painter = painterResource(id = R.drawable.ic_logo),
-                    contentDescription = "Bloom Logo"
-                )
-
-                Text(
-                    modifier = Modifier.paddingFromBaseline(top = 32.dp),
-                    text = "Beautiful home garden solutions",
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.subtitle1
-                )
-
-                Spacer(modifier = Modifier.height(40.dp))
-
-                Button(
-                    modifier = Modifier
-                        .height(48.dp)
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    onClick = {},
-                    shape = CircleShape,
-                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
-                ) {
-                    Text("Create Account", style = MaterialTheme.typography.button)
-                }
-
-                Text(
-                    modifier = Modifier
-                        .paddingFromBaseline(40.dp)
-                        .clickable {
-
-                        },
-                    text = "Log in",
-                    style = MaterialTheme.typography.button
-                )
+                Text("Create Account", style = MaterialTheme.typography.button)
             }
+
+            Text(
+                modifier = Modifier
+                    .paddingFromBaseline(40.dp)
+                    .clickable {
+                        onLogin()
+                    },
+                text = "Log in",
+                style = MaterialTheme.typography.button
+            )
         }
     }
 }

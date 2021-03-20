@@ -34,8 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.BloomTheme
 
 @Composable
-fun Login() {
-    Surface(color = MaterialTheme.colors.background) {
+fun Login(onLogin: (email: String, password: String) -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxSize(),
@@ -46,7 +45,6 @@ fun Login() {
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) {
                 var email by remember { mutableStateOf("") }
-
                 var password by remember { mutableStateOf("") }
 
 
@@ -55,6 +53,7 @@ fun Login() {
                     style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
                 )
+
                 Spacer(modifier = Modifier.height(8.dp))
 
                 InputField(text = email, placeholder = "Email address") {
@@ -100,7 +99,9 @@ fun Login() {
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth(),
-                    onClick = {},
+                    onClick = {
+                        onLogin(email, password)
+                    },
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
                     shape = CircleShape
                 ) {
@@ -108,7 +109,6 @@ fun Login() {
                 }
             }
         }
-    }
 }
 
 @Composable
@@ -132,7 +132,7 @@ fun InputField(text: String, placeholder: String, onTextChanged: (text: String) 
 @Composable
 fun LoginPreviewLight() {
     BloomTheme {
-        Login()
+        Login(onLogin = { email, password -> })
     }
 }
 
@@ -140,6 +140,6 @@ fun LoginPreviewLight() {
 @Composable
 fun LoginPreviewDark() {
     BloomTheme(darkTheme = true) {
-        Login()
+        Login(onLogin = { email, password -> })
     }
 }
